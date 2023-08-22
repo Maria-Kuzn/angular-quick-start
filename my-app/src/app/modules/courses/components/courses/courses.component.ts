@@ -9,6 +9,7 @@ import { Course } from 'src/app/domain/course';
 export class CoursesComponent implements OnInit{
 
   public coursesList: Course[] = [];
+  public searchValue: string = "";
 
   ngOnInit(): void {
     this.coursesList = [
@@ -44,5 +45,9 @@ export class CoursesComponent implements OnInit{
 
   public loadMore() {
     console.log("Load more")
+  }
+
+  public search() {
+    console.log("Search", this.searchValue);
   }
 }

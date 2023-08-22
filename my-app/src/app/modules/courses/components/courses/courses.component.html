@@ -1,0 +1,21 @@
+<div class="py-1 px-5">
+    <div class="flex justify-content-between">
+        <span>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" pInputText placeholder="Поиск" [(ngModel)]="searchValue" />
+            </span>
+            <p-button label="Поиск" class="p-button-help px-2" (click)="search()">
+            </p-button>
+        </span>
+        <p-button icon="pi pi-plus" label="Добавить курс"></p-button>
+    </div>
+    <div>
+
+    </div>
+    <div class="py-3 flex align-items-center justify-content-center">
+        <p-button label="Загрузить еще" class="p-button-outlined p-button-secondary" (click)="loadMore()">
+        </p-button>
+    </div>
+    
+</div>
