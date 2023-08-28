@@ -1,0 +1,28 @@
+.descriptionWrapper {
+    width: 90%;
+    padding: 0;
+    margin: 0;
+}
+.buttonsWrapper {
+    width: 10%;
+    padding: 0;
+    margin: 0;
+}
+
+.buttonsWrapper > button {
+    height: 30px;
+    width: 30px;
+    margin-left: 5px;
+    border: none;
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+}
+
+:host ::ng-deep .p-card {
+    .p-card-content {
+        padding: 0;
+    }
+}

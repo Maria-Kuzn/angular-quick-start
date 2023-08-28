@@ -7,7 +7,7 @@ import {MenuItem} from 'primeng/api';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent  implements OnInit{
+export class BreadcrumbsComponent implements OnInit{
   public items: MenuItem[] = [];
   public home: MenuItem = {};
 
