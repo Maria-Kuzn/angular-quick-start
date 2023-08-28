@@ -1,6 +1,11 @@
-<p-card class="m-1">
+<p-card class="m-1" 
+    [appHighlight]="course.creationDate" 
+    [ngClass]="{'topRated': course.topRated}">
     <div class="flex justify-content-between p-0 m-0">
-        <h3>{{course.title}}</h3>
+        <div class="flex">
+            <h3>{{course.title}}</h3>
+            <i *ngIf="course.topRated" class="pi pi-star-fill topRatedIcon"></i> 
+        </div>
         <div class="flex">
             <span class="px-3">
                 <i class="pi pi-clock"></i> 
