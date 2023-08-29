@@ -7,10 +7,13 @@ import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from "@angular/forms";
 import {CardModule} from 'primeng/card';
-
+import { HighlightDirective } from './directives/highlight.directive';
+import { CourseDurationPipe } from './pipes/course-duration.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 @NgModule({
-  declarations: [CoursesComponent, CourseItemComponent],
+  declarations: [CoursesComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe],
   imports: [
     CommonModule,
     InputTextModule,

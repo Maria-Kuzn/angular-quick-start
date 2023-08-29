@@ -10,15 +10,18 @@
         </span>
         <p-button icon="pi pi-plus" label="Добавить курс"></p-button>
     </div>
-    <app-course-item 
-        *ngFor="let course of coursesList"
-        [course]="course"
-        (editEvent)="editCourse($event)"
-        (deleteEvent)="deleteCourse($event)"
-        >
-    </app-course-item>
-    <div class="flex align-items-center justify-content-center loadMore">
-        <button pButton label="Загрузить еще" class="p-button-outlined p-button-secondary" (click)="loadMore()">
-        </button>
+    <div *ngIf="coursesList.length">
+        <app-course-item 
+            *ngFor="let course of coursesListFiltered | orderBy:'creationDate'" 
+            [course]="course" (editEvent)="editCourse($event)"
+            (deleteEvent)="deleteCourse($event)">
+        </app-course-item>
+        <div class="flex align-items-center justify-content-center loadMore">
+            <button pButton label="Загрузить еще" class="p-button-outlined p-button-secondary" (click)="loadMore()">
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!coursesList.length">
+        <h1 class="noData">Нет данных</h1>
     </div>
 </div>

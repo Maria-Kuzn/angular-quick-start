@@ -26,3 +26,15 @@ h3 {
         padding: 0;
     }
 }
+
+:host ::ng-deep .topRated {
+    .p-card-body {
+        background-color: var(--blue-50) !important;
+    }
+}
+
+.topRatedIcon {
+    color: var(--yellow-600);
+    margin-top: 0.3em;
+    margin-left: 0.2rem;
+}
