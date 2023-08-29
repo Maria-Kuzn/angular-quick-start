@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { Course } from 'src/app/domain/course';
+import { CoursesService } from 'src/app/services/courses.service';
 import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 
 @Component({
@@ -12,6 +14,12 @@ export class CoursesComponent implements OnInit{
   public coursesList: Course[] = [];
   public searchValue: string = "";
   public coursesListFiltered: any[] = [];
+  public visible: boolean = false;
+
+  constructor(private readonly coursesService: CoursesService, 
+    private readonly confirmationService: ConfirmationService) {
+
+  }
 
   ngOnChanges(): void {
     console.log('ngOnChanges');
@@ -19,41 +27,7 @@ export class CoursesComponent implements OnInit{
 
   ngOnInit(): void {
     console.log('ngOnInit');
-    this.coursesList = [
-      {
-        id: 1, 
-        title: "Название курса 1",
-        creationDate: new Date(2023, 7, 20),
-        duration: 123,
-        description: "Свежий курс",
-        topRated: true
-      },
-      {
-        id: 2, 
-        title: "Название курса 2",
-        creationDate: new Date(2020, 1, 20),
-        duration: 3,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer justo nisi, imperdiet ac ligula ac, placerat interdum nulla. Pellentesque et metus sit amet risus luctus molestie a vel orci. Integer mollis accumsan purus in venenatis.",
-        topRated: true
-      },
-      {
-        id: 3, 
-        title: "Название курса 3",
-        creationDate:  new Date(2023, 11, 20),
-        duration: 12300, 
-        description: "Будущий курс",
-        topRated: false
-      },
-      {
-        id: 4, 
-        title: "Название курса 4",
-        creationDate: new Date(2023, 7, 27),
-        duration: 60,
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        topRated: false
-      }
-    ];
-    this.coursesListFiltered = this.coursesList.slice();
+    this.updateCoursesList();
   }
 
   ngDoCheck(): void {
@@ -84,11 +58,32 @@ export class CoursesComponent implements OnInit{
     console.log("Search", this.searchValue);
   }
 
+  public updateCoursesList() {
+    this.coursesList = this.coursesService.getList();
+    this.search();
+  }
+
   public editCourse(courseInfo: string) {
     console.log('edit', courseInfo);
   }
 
+  public onClickDeleteCourse(courseId: string) {
+    this.confirmationService.confirm({
+      accept: () => {
+        this.deleteCourse(courseId);
+      },
+      reject: () => {
+        this.hideDeleteCourseDialog();
+      }
+    });
+  }
+
   public deleteCourse(courseId: string) {
-    console.log('delete', courseId);
+    this.coursesService.removeItem(courseId);
+    this.updateCoursesList();
+  }
+
+  public hideDeleteCourseDialog(){
+    this.visible = false;
   }
 }
