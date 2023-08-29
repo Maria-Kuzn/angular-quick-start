@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/domain/course';
+import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 
 @Component({
   selector: 'app-courses',
@@ -10,6 +11,7 @@ export class CoursesComponent implements OnInit{
 
   public coursesList: Course[] = [];
   public searchValue: string = "";
+  public coursesListFiltered: any[] = [];
 
   ngOnChanges(): void {
     console.log('ngOnChanges');
@@ -50,7 +52,8 @@ export class CoursesComponent implements OnInit{
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         topRated: false
       }
-    ]
+    ];
+    this.coursesListFiltered = this.coursesList.slice();
   }
 
   ngDoCheck(): void {
@@ -77,6 +80,7 @@ export class CoursesComponent implements OnInit{
   }
 
   public search() {
+    this.coursesListFiltered = new FilterPipePipe().transform(this.coursesList, this.searchValue);
     console.log("Search", this.searchValue);
   }
 

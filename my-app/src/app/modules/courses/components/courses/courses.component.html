@@ -11,7 +11,9 @@
         <p-button icon="pi pi-plus" label="Добавить курс"></p-button>
     </div>
     <div *ngIf="coursesList.length">
-        <app-course-item *ngFor="let course of coursesList" [course]="course" (editEvent)="editCourse($event)"
+        <app-course-item 
+            *ngFor="let course of coursesListFiltered | orderBy:'creationDate'" 
+            [course]="course" (editEvent)="editCourse($event)"
             (deleteEvent)="deleteCourse($event)">
         </app-course-item>
         <div class="flex align-items-center justify-content-center loadMore">

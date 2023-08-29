@@ -3,17 +3,17 @@
     [ngClass]="{'topRated': course.topRated}">
     <div class="flex justify-content-between p-0 m-0">
         <div class="flex">
-            <h3>{{course.title}}</h3>
+            <h3>{{course.title | uppercase}}</h3>
             <i *ngIf="course.topRated" class="pi pi-star-fill topRatedIcon"></i> 
         </div>
         <div class="flex">
             <span class="px-3">
                 <i class="pi pi-clock"></i> 
-                {{duration}}
+                {{course.duration | courseDuration}}
             </span>
             <span>
                 <i class="pi pi-calendar"></i> 
-                {{createDate}}
+                {{course.creationDate | date: 'longDate' : '': 'RU_ru'}}
             </span>
         </div>        
     </div>
