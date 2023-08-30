@@ -1,0 +1,16 @@
+:host ::ng-deep .p-card {
+ max-width: 800px;
+ margin: 0 auto;
+}
+
+:host ::ng-deep .p-card {
+    .p-card-content > div {
+        padding-bottom: 1rem;
+    }
+}
+
+:host ::ng-deep .p-card {
+    .p-card-content > div > span {
+        padding-top: 2rem;
+    }
+}
