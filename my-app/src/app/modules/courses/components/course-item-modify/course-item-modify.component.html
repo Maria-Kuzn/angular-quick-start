@@ -1,0 +1,48 @@
+<div class="py-1 px-5">
+    <p-card header="Добавление курса">
+        <div class="flex flex-column gap-2">
+            <label htmlFor="title">Наименование</label>
+            <input 
+                type="text" 
+                pInputText 
+                id="title"
+                [(ngModel)]="title"/>
+        </div>
+        <div class="flex flex-column gap-2">
+            <label htmlFor="description">Описание</label>
+            <textarea 
+                id="description" 
+                rows="5" 
+                cols="30" 
+                pInputTextarea 
+                [autoResize]="true"
+                [(ngModel)]="description"
+            ></textarea>
+        </div>
+        <div class="flex gap-2 align-items-center">
+            <div class="flex flex-column gap-2">
+                <label htmlFor="duration">Продолжительность</label>
+                <p-inputNumber 
+                    [(ngModel)]="duration" 
+                    inputId="duration" 
+                    mode="decimal" 
+                    [showButtons]="true"
+                    [min]="0"> 
+                </p-inputNumber>
+            </div>            
+            <span>{{duration | courseDuration}}</span>
+        </div>
+        <div class="flex flex-column gap-2">
+            <label htmlFor="creationDate">Дата</label>
+            <p-calendar id="creationDate" [(ngModel)]="creationDate" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="flex flex-column gap-2">
+            <label htmlFor="authors">Авторы</label>
+            <app-course-authors id="authors"></app-course-authors>
+        </div>
+        <div class="flex">
+            <button pButton label="Отмена" class="p-button-link mr-4" (click)="cancel()"></button>
+            <button pButton label="Сохранить" (click)="save()"></button>
+        </div>        
+    </p-card>    
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Course } from 'src/app/domain/course';
 import { CoursesService } from 'src/app/services/courses.service';
@@ -16,8 +17,11 @@ export class CoursesComponent implements OnInit{
   public coursesListFiltered: any[] = [];
   public visible: boolean = false;
 
-  constructor(private readonly coursesService: CoursesService, 
-    private readonly confirmationService: ConfirmationService) {
+  constructor(
+    private readonly coursesService: CoursesService, 
+    private readonly confirmationService: ConfirmationService,
+    private readonly router: Router
+    ) {
 
   }
 
@@ -85,5 +89,9 @@ export class CoursesComponent implements OnInit{
 
   public hideDeleteCourseDialog(){
     this.visible = false;
+  }
+
+  public addCourse() {
+    this.router.navigate(['/course-edit'])
   }
 }
