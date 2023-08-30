@@ -7,6 +7,8 @@ import { CoreModule } from './modules/core/core.module';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { AuthComponent } from './modules/auth/components/auth/auth.component';
+import { AuthModule } from './modules/auth/auth.module';
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -17,7 +19,8 @@ registerLocaleData(localeRu);
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    CoursesModule
+    CoursesModule,
+    AuthModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU'},],
   bootstrap: [AppComponent]

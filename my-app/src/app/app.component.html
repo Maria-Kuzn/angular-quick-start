@@ -1,3 +1,4 @@
-<app-header></app-header>
-<app-courses></app-courses>
+<app-header (logoutEvent)="logout($event)" [isAuthentificated]="isAuthentificated"></app-header>
+<app-courses *ngIf="isAuthentificated"></app-courses>
+<app-auth *ngIf="!isAuthentificated" (loginEvent)="login($event)"></app-auth>
 <app-footer></app-footer>

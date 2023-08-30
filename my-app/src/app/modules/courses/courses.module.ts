@@ -11,6 +11,11 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { CourseDurationPipe } from './pipes/course-duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipePipe } from './pipes/filter-pipe.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [CoursesComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe],
@@ -19,8 +24,12 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
     InputTextModule,
     ButtonModule,
     FormsModule,
-    CardModule
+    CardModule,
+    ConfirmDialogModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
-  exports: [CoursesComponent]
+  exports: [CoursesComponent],
+  providers: [ConfirmationService]
 })
 export class CoursesModule { }

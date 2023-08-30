@@ -1,0 +1,30 @@
+<div class="flex align-items-center justify-content-center authWrapper">
+    <p-card header="Вход" [style]="{ width: '360px' }">
+        <ng-template pTemplate="header">
+        </ng-template>
+        <div class="flex flex-column gap-2">
+            <label htmlFor="email">Email</label>
+            <input 
+                type="email" 
+                pInputText 
+                id="email" 
+                placeholder="Например, user@domain.ru"
+                [(ngModel)]="email"/>
+        </div>
+        <div class="flex flex-column gap-2 password">
+            <label htmlFor="password">Пароль</label>
+            <input 
+                type="password" 
+                pInputText 
+                id="password" 
+                placeholder="Ваш пароль"
+                [(ngModel)]="password"/>
+        </div>
+        <ng-template pTemplate="footer" >
+            <div class="flex justify-content-between align-items-center">
+                <a href="/">Забыли пароль?</a>
+                <p-button label="Войти" (click)="login()" [disabled]="!validateFields()" [style]="{ 'margin-left': '.5em' }"></p-button>
+            </div>            
+        </ng-template>
+    </p-card>
+</div>
