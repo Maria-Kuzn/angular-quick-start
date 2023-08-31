@@ -13,9 +13,8 @@ export class BreadcrumbsComponent implements OnInit{
 
   ngOnInit(): void {
     this.items = [
-      {label:'Курсы'}
+      {label:'Курсы', routerLink: '/courses'}
     ];
     this.home = {icon: 'pi pi-home', routerLink: '/'};
   }
-
 }

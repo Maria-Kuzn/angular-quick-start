@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesComponent } from './components/courses/courses.component';
+import { CoursesListComponent } from './components/courses-list/courses-list.component';
 import { CourseItemComponent } from './components/course-item/course-item.component';
 
 import { InputTextModule } from "primeng/inputtext";
@@ -22,11 +22,13 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { CourseAuthorsComponent } from './components/course-authors/course-authors.component';
 import { TagModule } from 'primeng/tag';
+import { CoursesRoutingModule } from './courses-routing.module';
+import { CoursesComponent } from './courses/courses.component';
 
 
 
 @NgModule({
-  declarations: [CoursesComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe, CourseItemModifyComponent, CourseAuthorsComponent],
+  declarations: [CoursesListComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe, CourseItemModifyComponent, CourseAuthorsComponent, CoursesComponent],
   imports: [
     CommonModule,
     InputTextModule,
@@ -39,9 +41,10 @@ import { TagModule } from 'primeng/tag';
     InputTextareaModule,
     InputNumberModule,
     CalendarModule,
-    TagModule
+    TagModule,
+    CoursesRoutingModule
   ],
-  exports: [CoursesComponent],
+  exports: [CoursesListComponent],
   providers: [ConfirmationService]
 })
 export class CoursesModule { }

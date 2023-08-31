@@ -8,7 +8,7 @@
             <p-button label="Поиск" class="p-button-help px-2" (click)="search()">
             </p-button>
         </span>
-        <p-button icon="pi pi-plus" label="Добавить курс" (click)="addCourse()"></p-button>
+        <button pButton icon="pi pi-plus" label="Добавить курс" routerLink="/courses/new"></button>
     </div>
     <div *ngIf="coursesListFiltered.length">
         <app-course-item 
@@ -35,3 +35,5 @@
     acceptLabel="Да"
     rejectLabel="Нет"
 ></p-confirmDialog>
+
+<router-outlet></router-outlet>
