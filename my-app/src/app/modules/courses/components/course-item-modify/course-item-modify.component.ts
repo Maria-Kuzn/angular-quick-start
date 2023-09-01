@@ -18,23 +18,25 @@ export class CourseItemModifyComponent implements OnInit {
   public description?: string = "";
   public id: string | undefined = undefined;
   public courseData: Course | undefined = undefined;
-  public mode: string;
-
+  public mode: string = 'add';
+  public formTitle: string = "Добавление курса";
 
   constructor (
     private readonly dataService: CoursesService, 
     private router: Router,
     private route: ActivatedRoute
-    ) {
-      this.id = this.route.snapshot.paramMap.get('id') || undefined; 
-      if (this.id === undefined) {
-        this.mode = 'add';
-      } else {
-        this.mode = 'edit';
-      }
-  }
+    ) {}
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id') || ""; 
+    console.log(this.id)
+      if (!/^\d+$/.test(this.id)) {
+        this.mode = 'add';
+        this.formTitle = "Добавление курса";
+      } else {
+        this.mode = 'edit';
+        this.formTitle = "Изменение курса";
+      }
     this.mode === 'edit' && this.getData().then(() => this.parseData());
   }
 

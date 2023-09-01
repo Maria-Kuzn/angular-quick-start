@@ -26,7 +26,6 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses/courses.component';
 
 
-
 @NgModule({
   declarations: [CoursesListComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe, CourseItemModifyComponent, CourseAuthorsComponent, CoursesComponent],
   imports: [
