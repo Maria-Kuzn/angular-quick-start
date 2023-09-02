@@ -7,9 +7,9 @@ import { CoursesListComponent } from './modules/courses/components/courses-list/
 import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/courses' },
+  { path: 'courses', loadChildren: () => import('./modules/courses/courses.module').then(m => m.CoursesModule)},
   { path: '**', component: NotFoundComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) }
 ];
 
 @NgModule({
