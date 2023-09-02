@@ -22,9 +22,12 @@ export class BreadcrumbsComponent implements OnInit {
       .subscribe(
         (event: NavigationEvent) => {
           const url = event instanceof NavigationStart && event.url;
+          //если путь courses/{{some_number}} - добавляем крошку с названием курса
           if (url && /\/courses\/\d/i.test(url)) {
             const courseId = url.split('/').pop();
             courseId !== undefined && this.getItemTitle(parseInt(courseId));
+          } else if (url === '/courses/new') {
+            this.addBreadCrumb("Добавление нового курса");
           } else {
             this.clearItems();
           }
@@ -44,8 +47,12 @@ export class BreadcrumbsComponent implements OnInit {
     if (itemId !== undefined) {
       title = this.dataService.getItemById(itemId)?.title || '';
     }
-    if (title) {
-      this.items = [...this.items, { label: title }];
+    this.addBreadCrumb(title);
+  }
+
+  public addBreadCrumb(label: string) {
+    if (label) {
+      this.items = [...this.items, { label: label }];
     }
   }
 
