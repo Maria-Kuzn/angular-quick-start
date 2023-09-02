@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../domain/course';
+import { Course, NewCourse } from '../domain/course';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +54,11 @@ export class CoursesService {
     return this.courses;
   }
 
-  public createCourse(course: Course) {
-    this.courses.push(course);
+  public createCourse(course: NewCourse) {
+    const courseId = this.courses[this.courses.length - 1].id + 1;
+    this.courses.push(
+      Object.assign(course, {id: courseId}) as Course
+    );
   }
 
   public getItemById(id: number) {
@@ -65,12 +68,15 @@ export class CoursesService {
   public updateItem(course: Course) {
     const existingCourseId = this.courses.findIndex((item) => item.id === course.id);
     if (existingCourseId) {
-      this.courses[existingCourseId] = course;
+      this.courses[existingCourseId] = Object.assign(this.courses[existingCourseId], course);
     }
   }
 
   public removeItem(id: number | string) {
-    const existingCourseId = this.courses.findIndex((item) => item.id.toString() === id.toString());
+    if (!id) {
+      return;
+    }
+    const existingCourseId = this.courses.findIndex((item) => item.id?.toString() === id.toString());
     if (existingCourseId !== undefined) {
       this.courses.splice(existingCourseId, 1);
     }

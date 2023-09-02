@@ -6,11 +6,12 @@ import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, LogoComponent, BreadcrumbsComponent, FooterComponent],
+  declarations: [HeaderComponent, LogoComponent, BreadcrumbsComponent, FooterComponent, NotFoundComponent],
   imports: [
     CommonModule,
     ButtonModule,

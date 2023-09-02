@@ -3,14 +3,15 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Course } from 'src/app/domain/course';
 import { CoursesService } from 'src/app/services/courses.service';
+import { CoursesRoutingModule } from '../../courses-routing.module';
 import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  selector: 'app-courses-list',
+  templateUrl: './courses-list.component.html',
+  styleUrls: ['./courses-list.component.scss']
 })
-export class CoursesComponent implements OnInit{
+export class CoursesListComponent implements OnInit{
 
   public coursesList: Course[] = [];
   public searchValue: string = "";
@@ -69,6 +70,8 @@ export class CoursesComponent implements OnInit{
 
   public editCourse(courseInfo: string) {
     console.log('edit', courseInfo);
+    const courseInfoObject = JSON.parse(courseInfo);
+    this.router.navigate(['courses/' + courseInfoObject.id])
   }
 
   public onClickDeleteCourse(courseId: string) {
@@ -89,9 +92,5 @@ export class CoursesComponent implements OnInit{
 
   public hideDeleteCourseDialog(){
     this.visible = false;
-  }
-
-  public addCourse() {
-    this.router.navigate(['/course-edit'])
   }
 }

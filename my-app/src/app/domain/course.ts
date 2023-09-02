@@ -6,3 +6,11 @@ export interface Course {
     description?: string;
     topRated: boolean;
 }
+
+export interface NewCourse {
+    title: string;
+    creationDate: Date;
+    duration: number;
+    description?: string;
+    topRated?: boolean;
+}

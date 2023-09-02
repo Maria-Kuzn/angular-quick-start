@@ -1,5 +1,5 @@
 <div class="py-1 px-5">
-    <p-card header="Добавление курса">
+    <p-card [header]="formTitle">
         <div class="flex flex-column gap-2">
             <label htmlFor="title">Наименование</label>
             <input 
@@ -41,7 +41,7 @@
             <app-course-authors id="authors"></app-course-authors>
         </div>
         <div class="flex">
-            <button pButton label="Отмена" class="p-button-link mr-4" (click)="cancel()"></button>
+            <button pButton label="Отмена" class="p-button-link mr-4" routerLink="/courses"></button>
             <button pButton label="Сохранить" (click)="save()"></button>
         </div>        
     </p-card>    

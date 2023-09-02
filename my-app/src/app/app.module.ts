@@ -16,10 +16,10 @@ registerLocaleData(localeRu);
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     CoreModule,
     CoursesModule,
-    AuthModule
+    AuthModule,
+    AppRoutingModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU'},],
   bootstrap: [AppComponent]
