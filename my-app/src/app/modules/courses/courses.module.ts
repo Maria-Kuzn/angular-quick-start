@@ -5,7 +5,7 @@ import { CourseItemComponent } from './components/course-item/course-item.compon
 
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CardModule } from 'primeng/card';
 import { HighlightDirective } from './directives/highlight.directive';
 import { CourseDurationPipe } from './pipes/course-duration.pipe';
@@ -41,7 +41,9 @@ import { CoursesComponent } from './courses/courses.component';
     InputNumberModule,
     CalendarModule,
     TagModule,
-    CoursesRoutingModule
+    CoursesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [CoursesListComponent],
   providers: [ConfirmationService]

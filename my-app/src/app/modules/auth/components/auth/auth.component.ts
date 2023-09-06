@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { User } from 'src/app/domain/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,13 +11,17 @@ export class AuthComponent {
   public email: string = "";
   public password: string = "";
 
-  @Output() loginEvent = new EventEmitter<string>();
+  @Output() loginEvent = new EventEmitter<User>();
 
   public validateFields() {
     return this.email && this.password;
   }
 
   login() {
-    this.loginEvent.emit(this.email);
+    const user: User = {
+      email: this.email,
+      password: this.password
+    }
+    this.loginEvent.emit(user);
   }
 }

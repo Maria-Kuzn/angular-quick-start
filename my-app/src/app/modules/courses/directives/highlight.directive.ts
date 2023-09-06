@@ -16,7 +16,7 @@ export class HighlightDirective implements AfterViewInit {
 //     Если creationDate < currentDate && creationDate >= currentDate – 14 дней – новый курс (используйте зеленую границу)
 // Если creationDate > currentDate – предстоящий курс (используйте синюю границу) (creationDate в данном случае – дата начала курса)
 // Остальные случаи – без изменений
-    const creationDate = this.creationDate.getTime();
+    const creationDate = new Date(this.creationDate).getTime();
     const currentDate = new Date().getTime();
     const twoWeeksTime = 14 * 24 * 60 * 60 * 1000;
 

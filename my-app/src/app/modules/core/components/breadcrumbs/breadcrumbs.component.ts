@@ -45,7 +45,7 @@ export class BreadcrumbsComponent implements OnInit {
   public getItemTitle(itemId: number | undefined) {
     let title = '';
     if (itemId !== undefined) {
-      title = this.dataService.getItemById(itemId)?.title || '';
+      // title = this.dataService.getItemById(itemId)?.title || '';
     }
     this.addBreadCrumb(title);
   }

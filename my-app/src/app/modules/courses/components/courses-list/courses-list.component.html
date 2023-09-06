@@ -5,14 +5,14 @@
                 <i class="pi pi-search"></i>
                 <input type="text" pInputText placeholder="Поиск" [(ngModel)]="searchValue" />
             </span>
-            <p-button label="Поиск" class="p-button-help px-2" (click)="search()">
+            <p-button label="Поиск" class="p-button-help px-2" (click)="updateCoursesList()">
             </p-button>
         </span>
         <button pButton icon="pi pi-plus" label="Добавить курс" routerLink="/courses/new"></button>
     </div>
-    <div *ngIf="coursesListFiltered.length">
+    <div *ngIf="coursesList$ | async as coursesList">
         <app-course-item 
-            *ngFor="let course of coursesListFiltered | orderBy:'creationDate'" 
+            *ngFor="let course of coursesList | orderBy:'creationDate'" 
             [course]="course" (editEvent)="editCourse($event)"
             (deleteEvent)="onClickDeleteCourse($event)">
         </app-course-item>
@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="!coursesListFiltered.length">
+    <div *ngIf="!coursesList$">
         <h1 class="noData">Нет данных</h1>
     </div>
 </div>

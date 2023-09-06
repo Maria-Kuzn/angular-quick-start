@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Course, NewCourse } from 'src/app/domain/course';
 import { AuthService } from 'src/app/services/auth.service';
 import { CoursesService } from 'src/app/services/courses.service';
@@ -12,14 +14,18 @@ import { CoursesService } from 'src/app/services/courses.service';
 })
 export class CourseItemModifyComponent implements OnInit {
 
-  public title: string = "";
-  public creationDate: Date = new Date();
-  public duration: number = 0;
-  public description?: string = "";
   public id: string | undefined = undefined;
-  public courseData: Course | undefined = undefined;
+  public courseData$: Observable<Course> | undefined = undefined;
   public mode: string = 'add';
   public formTitle: string = "Добавление курса";
+  public duration: number = 0;
+  public formData: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    creationDate: new FormControl(new Date(), Validators.required),
+    duration: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    id: new FormControl('', Validators.required),
+  });
 
   constructor (
     private readonly dataService: CoursesService, 
@@ -37,38 +43,29 @@ export class CourseItemModifyComponent implements OnInit {
         this.mode = 'edit';
         this.formTitle = "Изменение курса";
       }
-    this.mode === 'edit' && this.getData().then(() => this.parseData());
+      this.getData();
   }
 
   private getData() {
     if (this.id !== undefined) {
-      this.courseData = this.dataService.getItemById(parseInt(this.id))
+      this.dataService.getItemById(parseInt(this.id)).subscribe(data => {
+        if (data.creationDate) {
+          data.creationDate = new Date(data.creationDate);
+        }
+        this.formData.patchValue(data);
+        console.log(this.formData)
+      });
     }
     return Promise.resolve();
   }
 
-  private parseData() {
-    if (this.courseData) {
-      this.title = this.courseData.title;
-      this.creationDate = this.courseData.creationDate;
-      this.duration = this.courseData.duration;
-      this.description = this.courseData.description;
-    }
-  }
-
   public save() {
-    const data: NewCourse = {
-      title: this.title,
-      creationDate: this.creationDate,
-      duration: this.duration,
-      description: this.description
-    }
-    if (this.id && this.mode === 'edit') {
-      const dataWithId = Object.assign(data, {id: parseInt(this.id)});
-      this.dataService.updateItem(dataWithId as Course);
-    } else {
-      this.dataService.createCourse(data);
-    }
-    this.router.navigate(['/']);
+    // if (this.id && this.mode === 'edit') {
+    //   const dataWithId = Object.assign(data, {id: parseInt(this.id)});
+    //   this.dataService.updateItem(dataWithId as Course);
+    // } else {
+    //   this.dataService.createCourse(data);
+    // }
+    // this.router.navigate(['/']);
   }
 }

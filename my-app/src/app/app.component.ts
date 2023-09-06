@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { User } from './domain/user';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -15,10 +16,10 @@ export class AppComponent {
     this.updateAuth();
   }
 
-  public login(value: string) {
-    this.authService.login(value);
+  public login(user: User) {
+    this.authService.login(user);
     this.updateAuth();
-    console.log('Выполнен вход в систему');
+    //console.log('Выполнен вход в систему');
     this.router.navigate(['/courses']);
   }
 

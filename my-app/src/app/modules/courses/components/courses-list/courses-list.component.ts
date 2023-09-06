@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { Observable, map } from 'rxjs';
 import { Course } from 'src/app/domain/course';
 import { CoursesService } from 'src/app/services/courses.service';
 import { CoursesRoutingModule } from '../../courses-routing.module';
@@ -13,9 +14,9 @@ import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 })
 export class CoursesListComponent implements OnInit{
 
-  public coursesList: Course[] = [];
+  public coursesList$: Observable<Course[]> = this.coursesService.getCoursesList();
   public searchValue: string = "";
-  public coursesListFiltered: any[] = [];
+  // public coursesListFiltered: any[] = [];
   public visible: boolean = false;
 
   constructor(
@@ -55,17 +56,19 @@ export class CoursesListComponent implements OnInit{
   }
 
   public loadMore() {
-    console.log("Load more")
+    console.log("Load more");
+    this.coursesList$ = this.coursesService.loadMoreCourses();
   }
 
   public search() {
-    this.coursesListFiltered = new FilterPipePipe().transform(this.coursesList, this.searchValue);
+    // this.coursesList$ = new FilterPipePipe().transform(this.coursesList$, this.searchValue);
     console.log("Search", this.searchValue);
   }
 
   public updateCoursesList() {
-    this.coursesList = this.coursesService.getList();
-    this.search();
+    this.coursesList$ = this.coursesService.getCoursesList(this.searchValue).pipe(
+      map((data: any[]) => new FilterPipePipe().transform(data, this.searchValue))
+    );
   }
 
   public editCourse(courseInfo: string) {
@@ -87,7 +90,7 @@ export class CoursesListComponent implements OnInit{
 
   public deleteCourse(courseId: string) {
     this.coursesService.removeItem(courseId);
-    this.updateCoursesList();
+    // this.updateCoursesList();
   }
 
   public hideDeleteCourseDialog(){
