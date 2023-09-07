@@ -30,6 +30,6 @@ export class AppComponent {
   }
 
   public updateAuth() {
-    this.isAuthentificated = this.authService.isAuthenticated();
+    this.isAuthentificated = Boolean(this.authService.isAuthenticated());
   }
 }

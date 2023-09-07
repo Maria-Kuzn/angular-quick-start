@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   public isAuthenticated() {
-    return Boolean(localStorage.getItem('token'));
+    return localStorage.getItem('token') || "";
   }
 
   public getUserInfo(token: string) {

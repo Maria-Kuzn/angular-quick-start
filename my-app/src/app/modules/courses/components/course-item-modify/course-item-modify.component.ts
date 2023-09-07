@@ -35,7 +35,6 @@ export class CourseItemModifyComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || ""; 
-    console.log(this.id)
       if (!/^\d+$/.test(this.id)) {
         this.mode = 'add';
         this.formTitle = "Добавление курса";
@@ -53,19 +52,16 @@ export class CourseItemModifyComponent implements OnInit {
           data.creationDate = new Date(data.creationDate);
         }
         this.formData.patchValue(data);
-        console.log(this.formData)
       });
     }
     return Promise.resolve();
   }
 
   public save() {
-    // if (this.id && this.mode === 'edit') {
-    //   const dataWithId = Object.assign(data, {id: parseInt(this.id)});
-    //   this.dataService.updateItem(dataWithId as Course);
-    // } else {
-    //   this.dataService.createCourse(data);
-    // }
-    // this.router.navigate(['/']);
+    if (this.mode === 'edit') {
+      this.dataService.updateItem(this.formData.value).subscribe(() => this.router.navigate(['/']));  
+    } else {
+      this.dataService.createCourse(this.formData.value).subscribe(() => this.router.navigate(['/']));
+    }    
   }
 }

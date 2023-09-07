@@ -8,7 +8,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { AuthModule } from './modules/auth/auth.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -23,7 +24,14 @@ registerLocaleData(localeRu);
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'ru-RU'},],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'ru-RU'},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -60,15 +60,8 @@ export class CoursesListComponent implements OnInit{
     this.coursesList$ = this.coursesService.loadMoreCourses();
   }
 
-  public search() {
-    // this.coursesList$ = new FilterPipePipe().transform(this.coursesList$, this.searchValue);
-    console.log("Search", this.searchValue);
-  }
-
   public updateCoursesList() {
-    this.coursesList$ = this.coursesService.getCoursesList(this.searchValue).pipe(
-      map((data: any[]) => new FilterPipePipe().transform(data, this.searchValue))
-    );
+    this.coursesList$ = this.coursesService.getCoursesList(this.searchValue);
   }
 
   public editCourse(courseInfo: string) {
@@ -89,8 +82,7 @@ export class CoursesListComponent implements OnInit{
   }
 
   public deleteCourse(courseId: string) {
-    this.coursesService.removeItem(courseId);
-    // this.updateCoursesList();
+    this.coursesService.removeItem(courseId).subscribe(data => this.updateCoursesList());
   }
 
   public hideDeleteCourseDialog(){
