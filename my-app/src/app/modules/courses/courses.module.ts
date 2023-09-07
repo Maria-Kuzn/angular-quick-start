@@ -24,10 +24,23 @@ import { CourseAuthorsComponent } from './components/course-authors/course-autho
 import { TagModule } from 'primeng/tag';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses/courses.component';
+import { BreadcrumbsComponent } from '../core/components/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @NgModule({
-  declarations: [CoursesListComponent, CourseItemComponent, HighlightDirective, CourseDurationPipe, OrderByPipe, FilterPipePipe, CourseItemModifyComponent, CourseAuthorsComponent, CoursesComponent],
+  declarations: [
+    CoursesListComponent, 
+    CourseItemComponent, 
+    HighlightDirective, 
+    CourseDurationPipe, 
+    OrderByPipe, 
+    FilterPipePipe, 
+    CourseItemModifyComponent, 
+    CourseAuthorsComponent, 
+    CoursesComponent,
+    BreadcrumbsComponent
+  ],
   imports: [
     CommonModule,
     InputTextModule,
@@ -43,7 +56,8 @@ import { CoursesComponent } from './courses/courses.component';
     TagModule,
     CoursesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BreadcrumbModule
   ],
   exports: [CoursesListComponent],
   providers: [ConfirmationService]

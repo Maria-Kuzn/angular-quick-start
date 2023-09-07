@@ -10,6 +10,7 @@ import localeRu from '@angular/common/locales/ru';
 import { AuthModule } from './modules/auth/auth.module';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 registerLocaleData(localeRu);
 
 @NgModule({

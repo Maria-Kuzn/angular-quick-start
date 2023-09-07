@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Course } from 'src/app/domain/course';
+import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
   selector: 'app-course-item',
@@ -9,8 +10,8 @@ import { Course } from 'src/app/domain/course';
 })
 export class CourseItemComponent implements OnInit{
   @Input() course!: Course;
-  @Output() editEvent = new EventEmitter<string>();
-  @Output() deleteEvent = new EventEmitter<string>();
+  @Output() editEvent = new EventEmitter<Course>();
+  @Output() deleteEvent = new EventEmitter<number>();
 
   constructor() {
   }
@@ -18,10 +19,10 @@ export class CourseItemComponent implements OnInit{
   ngOnInit(): void {}
 
   public editCourse(event: any) {
-    this.editEvent.emit(JSON.stringify(this.course));
+    this.editEvent.emit(this.course);
   }
 
   public deleteCourse(event: any) {
-    this.deleteEvent.emit(this.course.id.toString());
+    this.deleteEvent.emit(this.course.id);
   }
 }
