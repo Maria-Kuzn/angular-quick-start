@@ -8,8 +8,8 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'courses', loadChildren: () => import('./modules/courses/courses.module').then(m => m.CoursesModule)},
-  { path: '**', component: NotFoundComponent },
-  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) }
+  { path: 'auth', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule) },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

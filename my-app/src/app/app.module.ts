@@ -5,12 +5,13 @@ import { AppComponent } from './app.component';
 import { CoursesModule } from './modules/courses/courses.module';
 import { CoreModule } from './modules/core/core.module';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { AuthModule } from './modules/auth/auth.module';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -20,6 +21,8 @@ registerLocaleData(localeRu);
   imports: [
     BrowserModule,
     CoreModule,
+    CommonModule,
+    BrowserAnimationsModule,
     CoursesModule,
     AuthModule,
     HttpClientModule,

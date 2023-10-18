@@ -26,6 +26,7 @@ import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses/courses.component';
 import { BreadcrumbsComponent } from '../core/components/breadcrumbs/breadcrumbs.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { NoDataComponent } from './components/no-data/no-data.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     CourseItemModifyComponent, 
     CourseAuthorsComponent, 
     CoursesComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    NoDataComponent
   ],
   imports: [
     CommonModule,
@@ -48,8 +50,6 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     FormsModule,
     CardModule,
     ConfirmDialogModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     InputTextareaModule,
     InputNumberModule,
     CalendarModule,

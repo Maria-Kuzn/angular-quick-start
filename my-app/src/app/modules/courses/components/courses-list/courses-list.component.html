@@ -8,22 +8,24 @@
             <p-button label="Поиск" class="p-button-help px-2" (click)="updateCoursesList()">
             </p-button>
         </span>
-        <button pButton icon="pi pi-plus" label="Добавить курс" routerLink="/courses/new"></button>
+        <button pButton icon="pi pi-plus" label="Добавить курс" (click)="addCourse()"></button>
     </div>
     <div *ngIf="coursesList$ | async as coursesList">
-        <app-course-item 
-            *ngFor="let course of coursesList | orderBy:'creationDate'" 
-            [course]="course" (editEvent)="editCourse($event)"
-            (deleteEvent)="onClickDeleteCourse($event)">
-        </app-course-item>
-        <div class="flex align-items-center justify-content-center loadMore">
-            <button pButton label="Загрузить еще" class="p-button-outlined p-button-secondary" (click)="loadMore()">
-            </button>
-        </div>
+        <ng-container *ngIf="coursesList.length; else noData">
+            <app-course-item 
+                *ngFor="let course of coursesList | orderBy:'creationDate'" 
+                [course]="course" (editEvent)="editCourse($event)"
+                (deleteEvent)="onClickDeleteCourse($event)">
+            </app-course-item>
+            <div class="flex align-items-center justify-content-center loadMore">
+                <button pButton label="Загрузить еще" class="p-button-outlined p-button-secondary" (click)="loadMore()">
+                </button>
+            </div>
+        </ng-container>
     </div>
-    <div *ngIf="!coursesList$">
-        <h1 class="noData">Нет данных</h1>
-    </div>
+    <ng-template #noData>
+        <app-no-data (resetFilters)="resetFilters()"></app-no-data>
+    </ng-template>
 </div>
 <p-confirmDialog #cd
     id="dialog" 
@@ -32,8 +34,11 @@
     icon="pi pi-exclamation-triangle"
     header="Удаление курса"
     message="Вы действительно хотите удалить этот курс?"
-    acceptLabel="Да"
-    rejectLabel="Нет"
-></p-confirmDialog>
+>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" class="p-button-secondary" label="Отмена" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" class="p-button-danger" label="Удалить" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
 
 <router-outlet></router-outlet>

@@ -3,11 +3,9 @@ export interface User {
     "password": string
 }
 
-export interface UserInfo {
+export interface UserInfo extends User {
     "id": number,
     "fakeToken": string,
     "firstName": string,
     "lastName": string,
-    "email": string,
-    "password": string
 }

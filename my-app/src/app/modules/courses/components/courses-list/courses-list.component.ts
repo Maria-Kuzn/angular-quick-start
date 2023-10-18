@@ -27,32 +27,9 @@ export class CoursesListComponent implements OnInit{
 
   }
 
-  ngOnChanges(): void {
-    console.log('ngOnChanges');
-  }
-
   ngOnInit(): void {
     console.log('ngOnInit');
     this.updateCoursesList();
-  }
-
-  ngDoCheck(): void {
-    console.log('ngDoCheck');
-  }
-  ngAfterContentInit(): void {
-    console.log('ngAfterContentInit');
-  }
-  ngAfterContentChecked(): void {
-    console.log('ngAfterContentChecked');
-  }
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-  }
-  ngAfterViewChecked(): void {
-    console.log('ngAfterViewChecked');
-  }
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy');
   }
 
   public loadMore() {
@@ -64,13 +41,17 @@ export class CoursesListComponent implements OnInit{
     this.coursesList$ = this.coursesService.getCoursesList(this.searchValue);
   }
 
-  public editCourse(courseInfo: string) {
+  public addCourse() {
+    this.router.navigate(['/courses/new'])
+  }
+
+  public editCourse(courseInfo: Course) {
     console.log('edit', courseInfo);
-    const courseInfoObject = JSON.parse(courseInfo);
+    const courseInfoObject = courseInfo;
     this.router.navigate(['courses/' + courseInfoObject.id])
   }
 
-  public onClickDeleteCourse(courseId: string) {
+  public onClickDeleteCourse(courseId: number) {
     this.confirmationService.confirm({
       accept: () => {
         this.deleteCourse(courseId);
@@ -81,11 +62,16 @@ export class CoursesListComponent implements OnInit{
     });
   }
 
-  public deleteCourse(courseId: string) {
+  public deleteCourse(courseId: number) {
     this.coursesService.removeItem(courseId).subscribe(data => this.updateCoursesList());
   }
 
   public hideDeleteCourseDialog(){
     this.visible = false;
+  }
+
+  public resetFilters() {
+    this.searchValue = "";
+    this.updateCoursesList();
   }
 }

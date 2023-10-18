@@ -64,4 +64,8 @@ export class CourseItemModifyComponent implements OnInit {
       this.dataService.createCourse(this.formData.value).subscribe(() => this.router.navigate(['/']));
     }    
   }
+
+  public cancel(): void {
+    this.router.navigate(['/']);
+  }
 }

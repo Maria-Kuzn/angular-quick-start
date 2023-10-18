@@ -13,7 +13,7 @@ export class AuthComponent {
 
   @Output() loginEvent = new EventEmitter<User>();
 
-  public validateFields() {
+  public get validateFields() {
     return this.email && this.password;
   }
 
